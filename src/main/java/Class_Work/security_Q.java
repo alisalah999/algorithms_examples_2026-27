@@ -1,21 +1,22 @@
-package Class_Work;
+package in_class;
 
 import java.util.Scanner;
 
-public class security_Q {
+public class InClassExercise_SecurityQuestion {
     static void main() {
         Scanner input = new Scanner(System.in);
+        String question = "What is your favourite colour?";
+        String answer = "blue";
 
-        String Seq_Q = "Whats your fav color?";
+        System.out.println("Security check - answer the following question:");
+        System.out.println(question);
+        String response = input.nextLine();
 
-        System.out.println("Seq Question"+ Seq_Q);
-
-        String Answer_Q = "Blue";
-
-        //Answer validation
-        if (Answer_Q.equals("Blue")) {
-            System.out.println("Authorized");
-        }else {
-            System.out.println("Authorization Failed");
+        if(response.equalsIgnoreCase(answer)){
+            System.out.println("Authorised.");
+        }else{
+            System.out.println("Authorisation failed.");
         }
+
+    }
 }
