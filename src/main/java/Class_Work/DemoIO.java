@@ -9,7 +9,7 @@ public class DemoIO {
 
         if(name.equals("Fred")){
             System.out.println("You're banned, get out!");
-        }elif(!name,equals("admin")){
+        }elif(!name,equals("admin")); {
             System.out.println("Continue ");
         }
 
