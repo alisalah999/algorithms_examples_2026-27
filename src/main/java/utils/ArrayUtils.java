@@ -53,4 +53,26 @@ public class ArrayUtils {
         }
         return max;
     }
+
+    /*    input   : nums (array of integers)
+          output  : lowest value in nums
+
+          set min to nums[0]
+
+          for each index i from 1 up to nums.length - 1:
+            if nums[i] is less than min:
+                update min to nums[i]
+          end for
+
+          return min
+    */
+    public static int findMin(int[] nums) {
+        int min = nums[0];
+        for (int i = 1; i < nums.length; i++) {
+            if (nums[i] < min) {
+                min = nums[i];
+            }
+        }
+        return min;
+    }
 }
