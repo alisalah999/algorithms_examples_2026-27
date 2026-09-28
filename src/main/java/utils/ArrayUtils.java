@@ -125,4 +125,51 @@ public class ArrayUtils {
         }
         return mostFrequent;
     }
+    /*    input   : nums (array of integers), value (integer)
+      output  : how many elements are greater than value
+
+      set total to 0
+
+      for each index i from 0 up to nums.length - 1:
+        if nums[i] is greater than value:
+            increase total by 1
+      end for
+
+      return total
+*/
+    public static int countGreater(int[] nums, int value) {
+        int total = 0;
+        for (int i = 0; i < nums.length; i++) {
+            if (nums[i] > value) {
+                total++;
+            }
+        }
+        return total;
+    }
+    /*    input   : nums (array of integers)
+      output  : how many elements are greater than the average
+
+      calculate average using calcAverage(nums)
+
+      set total to 0
+
+      for each index i from 0 up to nums.length - 1:
+        if nums[i] is greater than average:
+            increase total by 1
+      end for
+
+      return total
+*/
+    public static int countGreaterThanAverage(int[] nums) {
+        double average = calcAverage(nums);
+        int total = 0;
+
+        for (int i = 0; i < nums.length; i++) {
+            if (nums[i] > average) {
+                total++;
+            }
+        }
+        return total;
+    }
+
 }
