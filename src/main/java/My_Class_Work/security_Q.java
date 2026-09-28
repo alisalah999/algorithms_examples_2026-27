@@ -1,8 +1,8 @@
-package Class_Work;
+package My_Class_Work;
 
 import java.util.Scanner;
 
-public class ClassExercise_SecurityQuestion {
+class ClassExercise_SecurityQuestion {
     static void main() {
         Scanner input = new Scanner(System.in);
 

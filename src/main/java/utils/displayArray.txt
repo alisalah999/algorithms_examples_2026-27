@@ -1,0 +1,6 @@
+/*The method receives an array.
+It loops through each position in the array.
+For each position, it prints:
+the index (0, 1, 2, …)
+the value stored at that index
+//
