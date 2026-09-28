@@ -75,4 +75,54 @@ public class ArrayUtils {
         }
         return min;
     }
+    /*    input   : nums (array of integers), value (integer)
+      output  : how many times value appears in nums
+
+      set total to 0
+
+      for each index i from 0 up to nums.length - 1:
+        if nums[i] equals value:
+            increase total by 1
+      end for
+
+      return total
+*/
+    public static int count(int[] nums, int value) {
+        int total = 0;
+        for (int i = 0; i < nums.length; i++) {
+            if (nums[i] == value) {
+                total++;
+            }
+        }
+        return total;
+    }
+    /*    input   : nums (array of integers)
+      output  : the value that appears most often
+
+      set mostFrequent to nums[0]
+      set highestCount to 0
+
+      for each index i from 0 up to nums.length - 1:
+        set currentCount to count(nums, nums[i])
+
+        if currentCount is greater than highestCount:
+            update highestCount to currentCount
+            update mostFrequent to nums[i]
+      end for
+
+      return mostFrequent
+*/
+    public static int getMostFrequent(int[] nums) {
+        int mostFrequent = nums[0];
+        int highestCount = 0;
+
+        for (int i = 0; i < nums.length; i++) {
+            int currentCount = count(nums, nums[i]);
+            if (currentCount > highestCount) {
+                highestCount = currentCount;
+                mostFrequent = nums[i];
+            }
+        }
+        return mostFrequent;
+    }
 }
