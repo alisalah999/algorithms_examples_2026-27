@@ -1,0 +1,21 @@
+FUNCTION isPalindromeBrute(text):
+
+    IF text IS null:
+        RETURN false
+
+    CREATE array filtered WITH size equal to length of text
+    SET count TO 0
+
+    FOR each index i FROM 0 TO length of text - 1:
+        SET ch TO character at position i in text
+
+        IF ch IS a letter OR ch IS a digit:
+            CONVERT ch TO lowercase
+            STORE ch INTO filtered[count]
+            INCREMENT count
+
+    FOR each index i FROM 0 TO (count / 2) - 1:
+        IF filtered[i] IS NOT EQUAL TO filtered[count - 1 - i]:
+            RETURN false
+
+    RETURN true
