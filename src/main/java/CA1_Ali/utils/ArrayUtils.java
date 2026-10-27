@@ -69,5 +69,56 @@ public class ArrayUtils {
         return true;
     }
 
+    // ---------------------------------------------------------------------
+    // PROBLEM 3: Shortest contiguous subarray with a sum of at least target
+
+    /*
+     * Brute-force approach:
+     * Finds the shortest subarray whose sum is at least the target.
+     * Returns the start and end indexes of that subarray.
+     * If no such subarray exists, returns an array containing only 0.
+     *
+     * @param data   the input array of positive integers
+     * @param target the target sum
+     * @return an int[] with [startIndex, endIndex] or [0] if none exists
+     */
+    public static int [] shortestSubarrayBrute(int[] data, int target) {
+        if (data == null) {
+            throw new IllegalArgumentException("Cannot search a null arrya");
+        }
+        if (data.length==0) {
+            return new int[]{0};
+        }
+
+        int shortestLength = data.length + 1;
+        int bestStart = 0;
+        int bestEnd = 0;
+
+        for (int i=0; i<data.length; i++){
+            int CurrentSum = 0;
+            for (int j=i; j<data.length; j++){
+                CurrentSum += data[j];
+                if (CurrentSum >= target){
+                    int length = j - i + 1;
+
+                    if (length < shortestLength) {
+                        shortestLength = length;
+                        bestStart = i;
+                        bestEnd = j;
+                    }
+                    break;
+                }
+            }
+        }
+        // If no valid subarray was found
+        if (shortestLength == data.length + 1) {
+            return new int[]{0};
+        }
+
+        return new int[]{bestStart, bestEnd};
+
+
+    }
+
 
 }
