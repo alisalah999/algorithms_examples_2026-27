@@ -69,36 +69,5 @@ public class ArrayUtils {
         return true;
     }
 
-    //Problem 2
-    //brute-face
-    /**
-     * Brute-force approach: filters the input to letters and digits,
-     * converts uppercase letters to lowercase, then compares mirrored
-     * characters in the filtered array
-     *
-     * This method treats only letters and digits
-     * as characters to compare. It does not handle all Unicode letters.
-     *
-     * @param text the string to check
-     * @return true if the considered characters form a palindrome; false otherwise
-     */
-    public static boolean isPalindromeBrute(String text) {
-        if (text ==null) return false;
-        char[] filtered = new char[text.length()];
-        int count =0;
-        for (int i = 0; i< text.length(); i++) {
-            char ch = text.charAt(i);
 
-            if (isLetterOrDigit(ch)) {
-                filtered[count] = toLowerCase(ch);
-                count++;
-            }
-        }
-        for (int i=0; i<count/2; i++) {
-            if (filtered[i] != filtered[count -1 -i]){
-                return false;
-            }
-        }
-        return true;
-    }
 }
