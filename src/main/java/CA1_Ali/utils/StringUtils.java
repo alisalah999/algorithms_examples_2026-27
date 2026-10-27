@@ -35,5 +35,83 @@ public class StringUtils {
     }
 
 
+    //Problem 2
+    //brute-face
+    /**
+     * Brute-force approach: filters the input to letters and digits,
+     * converts uppercase letters to lowercase, then compares mirrored
+     * characters in the filtered array
+     *
+     * This method treats only letters and digits
+     * as characters to compare. It does not handle all Unicode letters.
+     *
+     * @param text the string to check
+     * @return true if the considered characters form a palindrome; false otherwise
+     */
+    public static boolean isPalindromeBrute(String text) {
+        if (text == null) {
+            throw new IllegalArgumentException("Cannot check if null is a palindrome");
+        }
+        // Build the cleaned version - only letters/digits, all lower case
+        char[] filtered = new char[text.length()];
+        int count =0;
+        for (int i = 0; i< text.length(); i++) {
+            char ch = text.charAt(i);
+
+            if (isLetterOrDigit(ch)) {
+                filtered[count] = toLowerCase(ch);
+                count++;
+            }
+        }
+        for (int i=0; i<count/2; i++) {
+            if (filtered[i] != filtered[count -1 -i]){
+                return false;
+            }
+        }
+        return true;
+    }
+
+    //tow Pointer Palindrome
+    /**
+     * Two-pointer approach: compares characters from both ends, skipping
+     * spaces, punctuation, and any other non-ASCII letter/digit characters.
+     * Character case is ignored. Lowercasing is performed using Character.toLowerCase(),
+     * which is permitted under the sheet rules.
+     *
+     * Contraindications: This method treats only ASCII letters and digits
+     * as characters to compare. It does not handle all Unicode letters.
+     *
+     * @param text the string to check
+     * @return true if the considered characters form a palindrome; false otherwise
+     */
+    public static boolean isPalindromeTwoPointer(String text) {
+        if (text == null) {
+            throw new IllegalArgumentException("Cannot check if null is a palindrome");
+        }
+        int left = 0;
+        int right = text.length() - 1;
+
+        while (left < right) {
+            // Skip anything that should not be considered
+            if (!isLetterOrDigit(text.charAt(left))) {
+                left++;
+            } else if (!isLetterOrDigit(text.charAt(right))) {
+                right--;
+            } else {
+                // Both pointers are on a valid character - compare them (case-insensitive)
+                if (toLowerCase(text.charAt(left)) != toLowerCase(text.charAt(right))) {
+                    return false;
+                }
+
+                left++;
+                right--;
+            }
+        }
+
+        return true;
+    }
+
+
+
 
 }
