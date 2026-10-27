@@ -125,15 +125,23 @@ public class ArrayUtils {
     }
 
     /*
-     * Tow Pointers (sliding window)
+     * Tow Pointers (sliding window)Finds the shortest contiguous subarray whose sum is at
+     * least the target. The window grows by moving end forward; whenever the sum reaches the
+     * target, the window is recorded and then shrunk from the left to see if a shorter
+     * valid window exists. If lengths tie, the earliest subarray is kept.
+     *
+     * ONLY valid for positive integers. Negative values (or zeros) mean
+     * that growing the window doesn't always increase the sum and shrinking doesn't always
+     * decrease it, so the window logic breaks. Only finds contiguous sections.
+     *
+     * @param data an array of positive integers
+     * @param target the minimum sum required
+     * @return an array holding the start and end positions (inclusive) of the shortest
+     * valid subarray, or an array containing only 0 if no valid subarray exists
      */
-    public static int[] shortestSubarrayTowPointer(int[] data, int target) {
+    public static int[] shortestSubarrayTwoPointer(int[] data, int target) {
         if (data == null) {
             throw new IllegalArgumentException("Cannot search a null array");
-        }
-
-        if (data.length == 0) {
-            return new int[]{0};
         }
 
         int shortestLength = data.length + 1;
@@ -141,12 +149,14 @@ public class ArrayUtils {
         int bestEnd = 0;
 
         int start = 0;
-        int currentSum = 0;
+        int sum = 0;
 
         for (int end = 0; end < data.length; end++) {
-            currentSum += data[end];
+            // Grow the window to include the new value
+            sum += data[end];
 
-            while (currentSum >= target && start <= end) {
+            // While the window is big enough, record it, then try to shrink it
+            while (sum >= target && start <= end) {
                 int length = end - start + 1;
 
                 if (length < shortestLength) {
@@ -155,18 +165,16 @@ public class ArrayUtils {
                     bestEnd = end;
                 }
 
-                currentSum -= data[start];
+                sum -= data[start];
                 start++;
             }
         }
 
+        // No valid subarray found
         if (shortestLength == data.length + 1) {
             return new int[]{0};
         }
 
         return new int[]{bestStart, bestEnd};
     }
-
-
-
 }
