@@ -72,52 +72,56 @@ public class ArrayUtils {
     // ---------------------------------------------------------------------
     // PROBLEM 3: Shortest contiguous subarray with a sum of at least target
 
-    /*
-     * Brute-force approach:
-     * Finds the shortest subarray whose sum is at least the target.
-     * Returns the start and end indexes of that subarray.
-     * If no such subarray exists, returns an array containing only 0.
+
+    /**
+     * BRUTE FORCE: Finds the shortest contiguous subarray whose sum is at least the target.
+     * Every start position is tried; the end is extended, keeping a running sum, until the
+     * sum reaches the target. If lengths tie, the earliest subarray is kept.
+
+     * too slow for large arrays. (Works for any integers if the
+     * early break is removed, but the break relies on values being positive.)
      *
-     * @param data   the input array of positive integers
-     * @param target the target sum
-     * @return an int[] with [startIndex, endIndex] or [0] if none exists
+     * @param data an array of positive integers
+     * @param target the minimum sum required
+     * @return an array holding the start and end positions (inclusive) of the shortest
+     * valid subarray, or an array containing only 0 if no valid subarray exists
      */
-    public static int [] shortestSubarrayBrute(int[] data, int target) {
+    public static int[] shortestSubarrayBruteForce(int[] data, int target) {
         if (data == null) {
-            throw new IllegalArgumentException("Cannot search a null arrya");
-        }
-        if (data.length==0) {
-            return new int[]{0};
+            throw new IllegalArgumentException("Cannot search a null array");
         }
 
         int shortestLength = data.length + 1;
         int bestStart = 0;
         int bestEnd = 0;
 
-        for (int i=0; i<data.length; i++){
-            int CurrentSum = 0;
-            for (int j=i; j<data.length; j++){
-                CurrentSum += data[j];
-                if (CurrentSum >= target){
-                    int length = j - i + 1;
+        for (int start = 0; start < data.length; start++) {
+            int sum = 0;
+
+            for (int end = start; end < data.length; end++) {
+                sum += data[end];
+
+                if (sum >= target) {
+                    int length = end - start + 1;
 
                     if (length < shortestLength) {
                         shortestLength = length;
-                        bestStart = i;
-                        bestEnd = j;
+                        bestStart = start;
+                        bestEnd = end;
                     }
+
+                    // Extending further from this start can only make it longer
                     break;
                 }
             }
         }
-        // If no valid subarray was found
+
+        // No valid subarray found
         if (shortestLength == data.length + 1) {
             return new int[]{0};
         }
 
         return new int[]{bestStart, bestEnd};
-
-
     }
 
 
