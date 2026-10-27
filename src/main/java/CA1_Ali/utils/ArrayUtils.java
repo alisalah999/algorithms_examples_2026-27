@@ -124,5 +124,49 @@ public class ArrayUtils {
         return new int[]{bestStart, bestEnd};
     }
 
+    /*
+     * Tow Pointers (sliding window)
+     */
+    public static int[] shortestSubarrayTowPointer(int[] data, int target) {
+        if (data == null) {
+            throw new IllegalArgumentException("Cannot search a null array");
+        }
+
+        if (data.length == 0) {
+            return new int[]{0};
+        }
+
+        int shortestLength = data.length + 1;
+        int bestStart = 0;
+        int bestEnd = 0;
+
+        int start = 0;
+        int currentSum = 0;
+
+        for (int end = 0; end < data.length; end++) {
+            currentSum += data[end];
+
+            while (currentSum >= target && start <= end) {
+                int length = end - start + 1;
+
+                if (length < shortestLength) {
+                    shortestLength = length;
+                    bestStart = start;
+                    bestEnd = end;
+                }
+
+                currentSum -= data[start];
+                start++;
+            }
+        }
+
+        if (shortestLength == data.length + 1) {
+            return new int[]{0};
+        }
+
+        return new int[]{bestStart, bestEnd};
+    }
+
+
 
 }
