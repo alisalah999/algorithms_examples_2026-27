@@ -121,6 +121,52 @@ public class StringUtils {
         return true;
     }
 
+    // PROBLEM 4: Reverse only the vowels in a String
+
+    /**
+     *
+     */
+    public static String reverseVowelsBruteForce(String text) {
+        if (text == null) {
+            throw new IllegalArgumentException("Cannot reverse the vowels of a null String");
+        }
+
+        char[] chars= text.toCharArray();
+
+        char[] vowels = new char[chars.length];
+        int vowelCount = 0;
+        for (int i = 0; i< chars.length; i++){
+            if (isVowel(chars[i])) {
+                vowels[vowelCount] = chars[i];
+                vowelCount++;
+            }
+        }
+
+        left = 0;
+        right = vowelCount -1;
+
+        while (left < right){
+            char temp = vowels[left];
+            vowels[left] = vowels[right];
+            vowels[right] = temp;
+
+            left++;
+            right--;
+        }
+
+        // putting reversed vowels back into chars
+        int vowelIndex = 0;
+        for (int i=0; i< chars.length; i++) {
+            if (isVowel(chars[i])){
+                chars[i] = vowels[vowelIndex];
+                vowelIndex++;
+            }
+        }
+        return new String(chars);
+    }
+
+
+
 
 
 
