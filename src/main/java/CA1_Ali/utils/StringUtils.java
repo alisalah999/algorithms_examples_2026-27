@@ -34,6 +34,16 @@ public class StringUtils {
         return c;
     }
 
+    /**
+     * Checks whether a character is a vowel (a, e, i, o, u in either case)
+     * @param c the character to check
+     * @return true if c is a vowel, false otherwise
+     */
+    private static boolean isVowel(char c) {
+        char lower = toLowerCase(c);
+        return lower == 'a' || lower == 'e' || lower == 'i' || lower == 'o' || lower == 'u';
+    }
+
 
     //Problem 2
     //brute-face
