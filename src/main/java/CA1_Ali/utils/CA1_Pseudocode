@@ -19,3 +19,26 @@ FUNCTION isPalindromeBrute(text):
             RETURN false
 
     RETURN true
+
+
+##Problem 4
+BRUTE FORCE (Upgraded Version):
+Instead of reversing the vowel array in a separate pass, this version
+ simply takes vowels from the END of the collected vowel list when
+rebuilding the String. This automatically produces the reversed vowel
+order without needing an explicit reverse loop.
+
+Why this is an upgrade:
+ - Removes the extra reverse loop (slightly more efficient).
+ - Still uses two full passes over the String (collect + rebuild).
+ - Still uses O(n) extra space for the vowel array.
+
+Example:
+ Input:  "hello Ali"
+  Collected vowels: [e, o, a, i]
+  Rebuild using end → start: i, a, o,e
+  Output: "hilla ole"
+
+This is still a brute-force solution, but more compact and avoids
+the manual array reversal step.
+

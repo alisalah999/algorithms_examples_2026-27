@@ -124,44 +124,45 @@ public class StringUtils {
     // PROBLEM 4: Reverse only the vowels in a String
 
     /**
+     *BRUTE FORCE: Reverses only the vowels in a String; all other characters stay where
+     * they are. The vowels are collected in order, then the String is rebuilt, filling each
+     * vowel position with the next vowel taken from the END of the collected vowels.
+     * <p>
+     * extra memory for the vowels array (the two pointer version avoids
+     * this); needs two full passes; Strings are immutable so a char[] copy is needed either way.
      *
+     * @param text the String to be processed
+     * @return a new String with the vowels in reversed order
      */
     public static String reverseVowelsBruteForce(String text) {
         if (text == null) {
             throw new IllegalArgumentException("Cannot reverse the vowels of a null String");
         }
 
-        char[] chars= text.toCharArray();
+        // Strings cannot be edited, so work on a char array
+        char[] chars = text.toCharArray();
 
+        //  1: collect the vowels in order
         char[] vowels = new char[chars.length];
         int vowelCount = 0;
-        for (int i = 0; i< chars.length; i++){
+
+        for (int i = 0; i < chars.length; i++) {
             if (isVowel(chars[i])) {
                 vowels[vowelCount] = chars[i];
                 vowelCount++;
             }
         }
 
-        left = 0;
-        right = vowelCount -1;
+        // 2: put the vowels back in, taking them from the end
+        int nextVowel = vowelCount - 1;
 
-        while (left < right){
-            char temp = vowels[left];
-            vowels[left] = vowels[right];
-            vowels[right] = temp;
-
-            left++;
-            right--;
-        }
-
-        // putting reversed vowels back into chars
-        int vowelIndex = 0;
-        for (int i=0; i< chars.length; i++) {
-            if (isVowel(chars[i])){
-                chars[i] = vowels[vowelIndex];
-                vowelIndex++;
+        for (int i = 0; i < chars.length; i++) {
+            if (isVowel(chars[i])) {
+                chars[i] = vowels[nextVowel];
+                nextVowel--;
             }
         }
+
         return new String(chars);
     }
 
