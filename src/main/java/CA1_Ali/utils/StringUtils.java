@@ -165,6 +165,53 @@ public class StringUtils {
 
         return new String(chars);
     }
+    /**
+     * TWO POINTER (closing window): Reverses only the vowels in a String; all other
+     * characters stay where they are. Pointers start at each end and move inwards, skipping
+     * non-vowels; when both are on a vowel, the two vowels are swapped.
+     * <p>
+     * Time: O(n) - linear. left and right only move towards each other, so each index is
+     * visited at most once. n = length of the String.<br>
+     * Space: O(n) - because Strings are immutable, a char[] copy is required (O(1) extra
+     * space beyond that copy: two pointers and a temp variable).
+     * <p>
+     * Contraindications: needs random access and a mutable array to swap in place; not
+     * suitable for data that can only be read forwards.
+     *
+     * @param text the String to be processed
+     * @return a new String with the vowels in reversed order
+     */
+    public static String reverseVowelsTwoPointer(String text) {
+        if (text == null) {
+            throw new IllegalArgumentException("Cannot reverse the vowels of a null String");
+        }
+
+        // Strings cannot be edited, so work on a char array
+        char[] chars = text.toCharArray();
+
+        int left = 0;
+        int right = chars.length - 1;
+
+        while (left < right) {
+            if (!isVowel(chars[left])) {
+                // Left is not a vowel - move on
+                left++;
+            } else if (!isVowel(chars[right])) {
+                // Right is not a vowel - move on
+                right--;
+            } else {
+                // Both are vowels - swap them and move both pointers inwards
+                char temp = chars[left];
+                chars[left] = chars[right];
+                chars[right] = temp;
+
+                left++;
+                right--;
+            }
+        }
+
+        return new String(chars);
+    }
 
 
 
